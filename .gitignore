@@ -1,1 +1,2 @@
-/myphp-backup-files/*
+# Ignore a specific file
+config.php

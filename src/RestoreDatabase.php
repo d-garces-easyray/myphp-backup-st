@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace MyphpBackup;
+
 /**
  * This file contains the Restore_Database class wich performs
  * a partial or complete restoration of any given MySQL database
@@ -7,21 +10,9 @@
  */
 
 /**
- * Define database parameters here
- */
-define("DB_USER", 'your_username');
-define("DB_PASSWORD", 'your_password');
-define("DB_NAME", 'your_db_name');
-define("DB_HOST", 'localhost');
-define("BACKUP_DIR", 'myphp-backup-files'); // Comment this line to use same script's directory ('.')
-define("BACKUP_FILE", 'myphp-backup-your_db_name-20181022_164459.sql.gz'); // Script will autodetect if backup file is gzipped based on .gz extension
-define("CHARSET", 'utf8');
-define("DISABLE_FOREIGN_KEY_CHECKS", true); // Set to true if you are having foreign key constraint fails
-
-/**
  * The Restore_Database class
  */
-class Restore_Database {
+class RestoreDatabase {
     /**
      * Host where the database is located
      */
@@ -272,24 +263,4 @@ class Restore_Database {
 
         flush();
     }
-}
-
-/**
- * Instantiate Restore_Database and perform backup
- */
-// Report all errors
-error_reporting(E_ALL);
-// Set script max execution time
-set_time_limit(900); // 15 minutes
-
-if (php_sapi_name() != "cli") {
-    echo '<div style="font-family: monospace;">';
-}
-
-$restoreDatabase = new Restore_Database(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-$result = $restoreDatabase->restoreDb(BACKUP_DIR, BACKUP_FILE) ? 'OK' : 'KO';
-$restoreDatabase->obfPrint("Restoration result: ".$result, 1);
-
-if (php_sapi_name() != "cli") {
-    echo '</div>';
 }
