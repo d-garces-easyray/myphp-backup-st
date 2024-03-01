@@ -1,2 +1,4 @@
 # Ignore a specific file
 config.php
+
+/vendor/

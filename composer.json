@@ -1,0 +1,19 @@
+{
+    "name": "d-garces/myphp-backup-st",
+    "description": "A Structured version of myphp-backup, to create a restore mysql databases",
+    "type": "library",
+    "license": "gnu",
+    "authors": [
+        {
+            "name": "d-garces",
+            "email": "d.garces@easyray-pro.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+          "MyphpBackup\\": "src/"
+        }
+      },
+    "require": {}
+}
