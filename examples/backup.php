@@ -7,7 +7,7 @@ use MyphpBackup\BackupDatabase;
 
 require_once __DIR__ . '/../config.php';
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/BackupDatabase.php';
 
 // Report all errors
 error_reporting(E_ALL);
@@ -38,6 +38,8 @@ $backupDatabase->obfPrint('Backup result: ' . $result, 1);
 
 // Use $output variable for further processing, for example to send it by email
 $output = $backupDatabase->getOutput();
+
+BackupDatabase::deleteOldBackups(60);
 
 if (php_sapi_name() != "cli") {
     echo '</div>';

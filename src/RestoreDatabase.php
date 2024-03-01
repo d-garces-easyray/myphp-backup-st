@@ -1,6 +1,7 @@
 <?php
 
 namespace MyphpBackup;
+use Exception;
 
 /**
  * This file contains the Restore_Database class wich performs
@@ -51,7 +52,7 @@ class RestoreDatabase {
     /**
      * Constructor initializes database
      */
-    function __construct($host, $username, $passwd, $dbName, $charset = 'utf8') {
+    function __construct($host, $username, $passwd, $dbName, $charset = 'utf8', $backupFile = null) {
         $this->host                    = $host;
         $this->username                = $username;
         $this->passwd                  = $passwd;
@@ -60,7 +61,7 @@ class RestoreDatabase {
         $this->disableForeignKeyChecks = defined('DISABLE_FOREIGN_KEY_CHECKS') ? DISABLE_FOREIGN_KEY_CHECKS : true;
         $this->conn                    = $this->initializeDatabase();
         $this->backupDir               = defined('BACKUP_DIR') ? BACKUP_DIR : '.';
-        $this->backupFile              = defined('BACKUP_FILE') ? BACKUP_FILE : null;
+        $this->backupFile              = $backupFile ?: ( defined('BACKUP_FILE') ? BACKUP_FILE : null );
     }
 
     /**
@@ -187,7 +188,7 @@ class RestoreDatabase {
         $source = $this->backupDir . '/' . $this->backupFile;
         $dest = $this->backupDir . '/' . date("Ymd_His", time()) . '_' . substr($this->backupFile, 0, -3);
 
-        $this->obfPrint('Gunzipping backup file ' . $source . '... ', 1, 1);
+        $this->obfPrint('Gunzipping backup file ' . basename($source) . '... ', 1, 1);
 
         // Remove $dest file if exists
         if (file_exists($dest)) {

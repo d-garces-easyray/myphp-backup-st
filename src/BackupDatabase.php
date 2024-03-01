@@ -1,6 +1,7 @@
 <?php
 
 namespace MyphpBackup;
+use Exception;
 
 /**
  * This file contains the Backup_Database class wich performs
@@ -309,7 +310,7 @@ class BackupDatabase {
         $source = $this->backupDir . '/' . $this->backupFile;
         $dest =  $source . '.gz';
 
-        $this->obfPrint('Gzipping backup file to ' . $dest . '... ', 1, 0);
+        $this->obfPrint('Gzipping backup file to ' . basename($dest) . '... ', 1, 0);
 
         $mode = 'wb' . $level;
         if ($fpOut = gzopen($dest, $mode)) {
@@ -432,5 +433,15 @@ class BackupDatabase {
                 $tables[] = $resultset[$i]['TABLE_NAME'];
         }
         return ($tables) ? $tables : false;
+    }
+
+    public static function deleteOldBackups( int $edge_time=DELETE_OLDER ) {
+        if (file_exists(BACKUP_DIR)) {
+            foreach (new \DirectoryIterator(BACKUP_DIR) as $fileInfo) {
+                if ($fileInfo->isFile() && time() - $fileInfo->getCTime() >= $edge_time) {
+                    unlink($fileInfo->getRealPath());
+                }
+            }
+        }
     }
 }

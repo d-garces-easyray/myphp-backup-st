@@ -6,7 +6,7 @@ use MyphpBackup\RestoreDatabase;
 
  require_once __DIR__ . '/../config.php';
 
- require_once __DIR__ . '/../vendor/autoload.php';
+ require_once __DIR__ . '/../src/RestoreDatabase.php';
  
 // Report all errors
 error_reporting(E_ALL);
@@ -17,8 +17,8 @@ if (php_sapi_name() != "cli") {
     echo '<div style="font-family: monospace;">';
 }
 
-$restoreDatabase = new RestoreDatabase(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-$result = $restoreDatabase->restoreDb(BACKUP_DIR, BACKUP_FILE) ? 'OK' : 'KO';
+$restoreDatabase = new RestoreDatabase(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, 'utf8', 'myphp-backup-consulenza_pa_db-20240229_142417.sql.gz');
+$result = $restoreDatabase->restoreDb() ? 'OK' : 'KO';
 $restoreDatabase->obfPrint("Restoration result: ".$result, 1);
 
 if (php_sapi_name() != "cli") {
