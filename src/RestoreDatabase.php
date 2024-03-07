@@ -264,4 +264,14 @@ class RestoreDatabase {
 
         flush();
     }
+
+    public static function listBackups() {
+        $backups = [];
+        if (file_exists(BACKUP_DIR)) {
+            foreach (new \DirectoryIterator(BACKUP_DIR) as $file) {
+                $backups[] = $file->getFilename();
+            }
+        }
+        return $backups;
+    }
 }
