@@ -2,7 +2,7 @@
     "name": "d-garces-easyray/myphp-backup-st",
     "description": "A Structured version of myphp-backup, to create a restore mysql databases",
     "type": "library",
-    "license": "gnu",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "d-garces",
