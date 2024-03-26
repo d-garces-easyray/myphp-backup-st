@@ -1,5 +1,5 @@
 {
-    "name": "d-garces/myphp-backup-st",
+    "name": "d-garces-easyray/myphp-backup-st",
     "description": "A Structured version of myphp-backup, to create a restore mysql databases",
     "type": "library",
     "license": "gnu",
