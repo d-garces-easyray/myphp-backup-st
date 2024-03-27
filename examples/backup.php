@@ -5,9 +5,9 @@
 
 use MyphpBackup\BackupDatabase;
 
-require_once __DIR__ . '/../config.php';
-
-require_once __DIR__ . '/../src/BackupDatabase.php';
+# EXAMPLE OF GLOBAL CONFIG INCLUSION
+require_once __DIR__ . '/../config.php';    # EXAMPLE AND NEEDED VARIABLES
+require_once __DIR__ . '/vendor/autoload.php';
 
 // Report all errors
 error_reporting(E_ALL);
@@ -39,7 +39,7 @@ $backupDatabase->obfPrint('Backup result: ' . $result, 1);
 // Use $output variable for further processing, for example to send it by email
 $output = $backupDatabase->getOutput();
 
-BackupDatabase::deleteOldBackups(60);
+BackupDatabase::deleteOldBackups(DELETE_OLDER);
 
 if (php_sapi_name() != "cli") {
     echo '</div>';

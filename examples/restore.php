@@ -4,9 +4,9 @@
  */
 use MyphpBackup\RestoreDatabase;
 
- require_once __DIR__ . '/../config.php';
-
- require_once __DIR__ . '/../src/RestoreDatabase.php';
+# EXAMPLE OF GLOBAL CONFIG INCLUSION
+require_once __DIR__ . '/../config.php';    # EXAMPLE AND NEEDED VARIABLES
+require_once __DIR__ . '/vendor/autoload.php';
  
 // Report all errors
 error_reporting(E_ALL);
